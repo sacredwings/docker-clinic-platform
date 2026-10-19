@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres        # фиксированное имя, по которому будут обращаться проекты
+    environment:
+      POSTGRES_PASSWORD: 11111111
+      POSTGRES_DB: postgres               # можно оставить, но проекты создадут свои БД
+    ports:
+      - "5432:5432"                       # доступ с хоста (например, для DBeaver)
+    volumes:
+      - d:/Data/pg:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true
+    name: shared-network
